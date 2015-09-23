@@ -1,0 +1,27 @@
+<!doctype HTML>
+<title>{% block title %}{% endblock %} | Мое приложение shortly</title>
+<link rel=stylesheet href=/static/style.css type=text/css>
+<div class=box>
+	<h1><a href=/>shortly</a></h1>
+	<p class=tagline>Shortly is a URL shortener written with Werkzeug</p>
+	{% block body %}{% endblock %}
+</div>
+{% if list_shortlies %}
+	<div class="box2">
+		<p>Список сохраненных ссылок</p>
+		<table align="center">
+			<tr>
+				<th>Short link</th>
+				<th>Usage count</th>
+				<th>URL</th>
+			</tr>
+			{% for link in list_shortlies %}
+				<tr>
+					<td class="col1"><a href="/{{ link.short_id }}">http://localhost:5000/{{ link.short_id }}</a></td>
+					<td class="col2">{{ link.click_count }}</td>
+					<td class="col3"><a href="{{ link.url_target }}">{{ link.url_target }}</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endif %}
